@@ -12,8 +12,6 @@
       <string>run</string>
       <string>--config</string>
       <string>__CONFIG_PATH__</string>
-      <string>--log-file</string>
-      <string>__LOG_PATH__</string>
     </array>
 
     <key>WorkingDirectory</key>
