@@ -1,0 +1,35 @@
+# Copy to ~/.slack-status-sync/config.yaml and edit.
+# Or: npm run dev -- init
+
+pollIntervalSeconds: 30
+lookAheadMinutes: 15
+lookBehindMinutes: 5
+timezone: Europe/London
+
+# Optional: only consider events from these Calendar.app calendar titles.
+# Omit or leave empty to use all calendars the helper can see.
+# calendarNames:
+#   - "Calendar"
+#   - "Work"
+
+# Lower priority number wins when multiple matched events overlap.
+# Matching is a case-insensitive substring of the event title.
+# notifications: snooze | normal
+rules:
+  - eventNameContains: "Focus"
+    status: "Focusing"
+    emoji: ":dart:"
+    notifications: snooze
+    priority: 10
+
+  - eventNameContains: "1:1"
+    status: "In a 1:1"
+    emoji: ":speech_balloon:"
+    notifications: snooze
+    priority: 20
+
+  - eventNameContains: "Standup"
+    status: "In standup"
+    emoji: ":calendar:"
+    notifications: snooze
+    priority: 30
