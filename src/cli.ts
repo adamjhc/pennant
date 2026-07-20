@@ -16,7 +16,6 @@ import { createLogger } from "./logger.js";
 import {
   defaultConfigPath,
   defaultDataDir,
-  defaultLogPath,
   defaultStatePath,
 } from "./paths.js";
 import { storeSlackToken } from "./slack/client.js";
@@ -113,7 +112,8 @@ calendar
     const global = getGlobalOpts(command);
     const logger = createLogger({
       level: global.verbose ? "debug" : "info",
-      logFile: global.logFile ?? defaultLogPath(),
+      logFile: global.logFile,
+
     });
     ensureDataDir();
 
@@ -216,7 +216,8 @@ calendar
     const global = getGlobalOpts(command);
     const logger = createLogger({
       level: global.verbose ? "debug" : "info",
-      logFile: global.logFile ?? defaultLogPath(),
+      logFile: global.logFile,
+
     });
     ensureDataDir();
 
@@ -256,7 +257,8 @@ program
     const global = getGlobalOpts(command);
     const logger = createLogger({
       level: global.verbose ? "debug" : "info",
-      logFile: global.logFile ?? defaultLogPath(),
+      logFile: global.logFile,
+
     });
     ensureDataDir();
 
@@ -284,7 +286,8 @@ program
     const global = getGlobalOpts(command);
     const logger = createLogger({
       level: global.verbose ? "debug" : "info",
-      logFile: global.logFile ?? defaultLogPath(),
+      logFile: global.logFile,
+
     });
     ensureDataDir();
     const configPath = resolveConfigPath(global.config);
@@ -305,7 +308,8 @@ program
     const global = getGlobalOpts(command);
     const logger = createLogger({
       level: global.verbose ? "debug" : "info",
-      logFile: global.logFile ?? defaultLogPath(),
+      logFile: global.logFile,
+
     });
     ensureDataDir();
     const configPath = resolveConfigPath(global.config);

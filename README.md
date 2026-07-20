@@ -137,7 +137,7 @@ chmod +x scripts/install-launchd.sh scripts/uninstall-launchd.sh
 
 **Important:** run `calendar authorize` and verify `calendar list` interactively **before** installing launchd. Background agents cannot show the first TCC prompt reliably.
 
-Logs append to `~/.slack-status-sync/sync.log`.
+Logs go to `~/.slack-status-sync/sync.log` via launchd stdout/stderr redirection. Use `--log-file` only for interactive runs when you also want a file copy; combining it with launchd redirection duplicates lines.
 
 Unload:
 
