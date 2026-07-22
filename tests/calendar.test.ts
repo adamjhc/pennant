@@ -1,25 +1,22 @@
 import { describe, expect, it } from "vitest";
-import {
-  CalendarReaderError,
-  filterByCalendarNames,
-  mapHelperEvent,
-} from "../src/calendar/reader.js";
+import { filterByCalendarNames } from "../src/config.js";
 import type { CalendarEvent } from "../src/calendar/types.js";
+import { mapWireEvent } from "../src/calendar/map-event.js";
 import { createLogger } from "../src/logger.js";
 
-describe("mapHelperEvent", () => {
-  it("maps helper payload fields", () => {
-    const mapped = mapHelperEvent({
+describe("mapWireEvent", () => {
+  it("maps wire payload fields", () => {
+    const mapped = mapWireEvent({
       id: "evt-1",
-      eventIdentifier: "evt-1",
-      calendarItemExternalIdentifier: "ext-1",
+      iCalUId: "ext-1",
+      changeKey: null,
       title: "Deep Focus",
-      start: "2026-07-20T11:00:00Z",
-      end: "2026-07-20T12:00:00Z",
+      start: "2026-07-20T11:00:00.000Z",
+      end: "2026-07-20T12:00:00.000Z",
       isAllDay: false,
       isCancelled: false,
       response: "accepted",
-      availability: "busy",
+      showAs: "busy",
       calendarName: "Work",
       calendarId: "cal-1",
     });
@@ -66,9 +63,12 @@ describe("filterByCalendarNames", () => {
     },
   ];
 
-  it("returns all events when no allowlist is set", () => {
+  it("returns all events when the allowlist is omitted", () => {
     expect(filterByCalendarNames(events, undefined)).toHaveLength(2);
-    expect(filterByCalendarNames(events, [])).toHaveLength(2);
+  });
+
+  it("returns no events when the allowlist is explicitly empty", () => {
+    expect(filterByCalendarNames(events, [])).toHaveLength(0);
   });
 
   it("filters by calendar title case-insensitively", () => {
@@ -81,7 +81,7 @@ describe("logger title privacy", () => {
     const chunks: string[] = [];
     const originalWrite = process.stdout.write.bind(process.stdout);
     process.stdout.write = ((chunk: string | Uint8Array) => {
-      chunks.push(typeof chunk === "string" ? chunk : chunk.toString("utf8"));
+      chunks.push(typeof chunk === "string" ? chunk : Buffer.from(chunk).toString("utf8"));
       return true;
     }) as typeof process.stdout.write;
 
@@ -96,13 +96,5 @@ describe("logger title privacy", () => {
     expect(line).toContain('"title":"[omitted]"');
     expect(line).not.toContain("Secret Meeting");
     expect(line).toContain('"eventId":"abc"');
-  });
-});
-
-describe("CalendarReaderError", () => {
-  it("captures helper error codes", () => {
-    const error = new CalendarReaderError("denied", "permission_denied", 3);
-    expect(error.code).toBe("permission_denied");
-    expect(error.exitCode).toBe(3);
   });
 });

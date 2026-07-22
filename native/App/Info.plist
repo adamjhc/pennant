@@ -3,32 +3,32 @@
 <plist version="1.0">
   <dict>
     <key>CFBundleExecutable</key>
-    <string>calendar-reader</string>
+    <string>Slack Status Sync</string>
     <key>CFBundleIdentifier</key>
-    <string>com.slack-status-sync.calendar-reader</string>
+    <string>com.slack-status-sync.app</string>
     <key>CFBundleName</key>
-    <string>Slack Status Sync Calendar</string>
+    <string>Slack Status Sync</string>
     <key>CFBundleDisplayName</key>
-    <string>Slack Status Sync Calendar</string>
+    <string>Slack Status Sync</string>
     <key>CFBundleVersion</key>
-    <string>1.1.0</string>
+    <string>2.0.0</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.1.0</string>
+    <string>2.0.0</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>LSMinimumSystemVersion</key>
-    <string>13.0</string>
+    <string>14.0</string>
     <key>LSUIElement</key>
-    <false/>
+    <true/>
     <key>NSHighResolutionCapable</key>
     <true/>
     <key>NSPrincipalClass</key>
     <string>NSApplication</string>
     <key>NSCalendarsUsageDescription</key>
-    <string>slack-status-sync reads your calendar events to update your Slack status and notification settings when matching meetings start.</string>
+    <string>Slack Status Sync reads your calendar events to update your Slack status and notification settings when matching meetings start.</string>
     <key>NSCalendarsFullAccessUsageDescription</key>
-    <string>slack-status-sync reads your calendar events to update your Slack status and notification settings when matching meetings start.</string>
+    <string>Slack Status Sync reads your calendar events to update your Slack status and notification settings when matching meetings start.</string>
   </dict>
 </plist>

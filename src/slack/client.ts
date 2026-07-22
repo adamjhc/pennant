@@ -1,5 +1,4 @@
 import { WebClient } from "@slack/web-api";
-import { getSecret, SECRET_ACCOUNTS, setSecret } from "../keychain.js";
 import type { Logger } from "../logger.js";
 
 export interface SlackStatusUpdate {
@@ -16,14 +15,6 @@ export class SlackClient {
   constructor(token: string, logger: Logger) {
     this.client = new WebClient(token);
     this.logger = logger;
-  }
-
-  static fromKeychain(logger: Logger): SlackClient {
-    const token = getSecret(SECRET_ACCOUNTS.slackToken);
-    if (!token) {
-      throw new Error("Slack token not found. Run: slack-status-sync auth slack");
-    }
-    return new SlackClient(token, logger);
   }
 
   async validate(): Promise<{ userId: string; team?: string }> {
@@ -69,16 +60,4 @@ export class SlackClient {
       throw error;
     }
   }
-}
-
-export async function storeSlackToken(token: string, logger: Logger): Promise<void> {
-  const trimmed = token.trim();
-  if (!trimmed.startsWith("xoxp-") && !trimmed.startsWith("xoxe.xoxp-")) {
-    throw new Error("Expected a Slack user token (xoxp-...)");
-  }
-  const client = new SlackClient(trimmed, logger);
-  const identity = await client.validate();
-  setSecret(SECRET_ACCOUNTS.slackToken, trimmed);
-  logger.info("Slack token stored", { userId: identity.userId, team: identity.team });
-  console.log(`Slack authenticated as user ${identity.userId}${identity.team ? ` on ${identity.team}` : ""}`);
 }

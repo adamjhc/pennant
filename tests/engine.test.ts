@@ -30,7 +30,6 @@ const config: AppConfig = {
   pollIntervalSeconds: 30,
   lookAheadMinutes: 15,
   lookBehindMinutes: 5,
-  timezone: "UTC",
   rules: [
     {
       eventNameContains: "Focus",

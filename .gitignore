@@ -3,9 +3,8 @@ dist/
 .env
 .env.*
 !.env.example
-config.yaml
-config.local.yaml
-state.json
 *.log
 .DS_Store
 coverage/
+*.tmp
+.build/

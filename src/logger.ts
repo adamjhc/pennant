@@ -1,4 +1,4 @@
-import { appendFileSync, mkdirSync } from "node:fs";
+import { appendFileSync, chmodSync, mkdirSync } from "node:fs";
 import { dirname } from "node:path";
 
 export type LogLevel = "debug" | "info" | "warn" | "error";
@@ -21,6 +21,8 @@ export interface LoggerOptions {
   level?: LogLevel;
   logFile?: string;
   json?: boolean;
+  /** When true, write info/debug lines to stderr so stdout stays free for IPC. */
+  stdoutAsStderr?: boolean;
 }
 
 function redact(value: unknown): unknown {
@@ -86,12 +88,19 @@ export function createLogger(options: LoggerOptions = {}): Logger {
           fields ? ` ${JSON.stringify(redact(fields))}` : ""
         }`;
 
-    const stream = level === "error" || level === "warn" ? process.stderr : process.stdout;
+    const stream =
+      options.stdoutAsStderr || level === "error" || level === "warn"
+        ? process.stderr
+        : process.stdout;
     stream.write(`${line}\n`);
 
     if (options.logFile) {
-      mkdirSync(dirname(options.logFile), { recursive: true });
-      appendFileSync(options.logFile, `${line}\n`, "utf8");
+      mkdirSync(dirname(options.logFile), { recursive: true, mode: 0o700 });
+      appendFileSync(options.logFile, `${line}\n`, {
+        encoding: "utf8",
+        mode: 0o600,
+      });
+      chmodSync(options.logFile, 0o600);
     }
   };
 

@@ -1,27 +1,24 @@
 {
   "name": "slack-status-sync",
-  "version": "1.1.0",
-  "description": "Sync Slack status and DND from local Calendar.app event titles",
+  "version": "2.0.0",
+  "description": "macOS menu-bar app that syncs Slack status and DND from Calendar.app event titles",
   "type": "module",
-  "bin": {
-    "slack-status-sync": "./dist/cli.js"
-  },
   "scripts": {
-    "build:native": "bash scripts/build-native.sh",
+    "setup:signing": "bash scripts/setup-local-signing.sh",
     "build:ts": "tsc",
-    "build": "npm run build:native && npm run build:ts",
-    "start": "node dist/cli.js",
-    "dev": "tsx src/cli.ts",
-    "calendar:authorize": "tsx src/cli.ts calendar authorize",
-    "calendar:status": "tsx src/cli.ts calendar status",
-    "calendar:list": "tsx src/cli.ts calendar list",
-    "auth:slack": "tsx src/cli.ts auth slack",
-    "sync": "tsx src/cli.ts sync --once",
-    "run": "tsx src/cli.ts run",
+    "build:sidecar": "esbuild src/sidecar.ts --bundle --platform=node --target=node20 --format=cjs --outfile=dist/sidecar.cjs",
+    "build": "bash scripts/build-app.sh",
+    "install:app": "bash scripts/install-app.sh",
+    "verify:identity": "bash scripts/verify-identity.sh",
+    "verify:rebuild": "bash scripts/verify-rebuild-identity.sh",
+    "smoke": "bash scripts/smoke-app.sh",
+    "dev:sidecar": "tsx src/sidecar.ts",
     "test": "vitest run",
+    "test:native": "cd native/App && swift run NativeModelChecks",
+    "test:all": "npm test && npm run test:native",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit",
-    "lint": "tsc --noEmit"
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.test.json",
+    "lint": "npm run typecheck"
   },
   "engines": {
     "node": ">=20"
@@ -32,12 +29,12 @@
   "license": "MIT",
   "dependencies": {
     "@slack/web-api": "^7.8.0",
-    "commander": "^13.1.0",
-    "yaml": "^2.7.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {
     "@types/node": "^22.13.10",
+    "esbuild": "^0.25.0",
+    "postject": "^1.0.0-alpha.6",
     "tsx": "^4.19.3",
     "typescript": "^5.8.2",
     "vitest": "^3.0.8"

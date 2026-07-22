@@ -1,214 +1,144 @@
-# slack-status-sync
+# Slack Status Sync
 
-Local macOS automation that sets your Slack status and notification snooze from **Calendar.app event titles**.
+macOS **menu-bar** app that sets your Slack status and notification snooze from **Calendar.app** event titles.
 
-It polls your local calendars every 30 seconds (via EventKit). When a title-matched event **starts**, it applies the configured Slack status/emoji/expiry and DND behavior once. Manual Slack changes during an event are left alone; the next matched event start can override them.
+It lives in the status bar as `🔄`, polls local calendars on a timer, and when a title-matched event **starts**, applies the configured Slack status/emoji/expiry and DND behavior once.
 
-No Microsoft Entra / Graph registration is required. Your work Outlook/Exchange events just need to appear in Apple’s Calendar app.
+## Requirements
 
-## How it works
+- macOS 14 Sonoma or newer (Apple Silicon or Intel — builds for your current CPU)
+- Xcode Command Line Tools (`swiftc`, `xcrun`)
+- Node.js 20+ (build machine only; the installed app embeds its sync core)
+- A Slack user token with `users.profile:write` and `dnd:write`
+- Work events visible in **Calendar.app**
 
-```mermaid
-flowchart LR
-  CalendarApp[Calendar.app / EventKit] -->|native helper| Sync[slack-status-sync]
-  Config[config.yaml title rules] --> Sync
-  Sync -->|users.profile.set| SlackStatus[Slack status]
-  Sync -->|dnd.setSnooze / endSnooze| SlackDnd[Slack DND]
-```
+## One-time: local code signing
 
-- **EventKit** helper (`dist/calendar-reader`) reads calendars you already sync on this Mac
-- **Slack user token** with `users.profile:write` and `dnd:write`
-- Slack token stored in macOS Keychain (file fallback under `~/.slack-status-sync/secrets/`)
-- Durable state in `~/.slack-status-sync/state.json` so restarts do not re-apply the same event
-
-## Prerequisites
-
-- macOS with Node.js 20+
-- Xcode Command Line Tools (`swiftc`) to build the EventKit helper
-- Work events visible in **Calendar.app** (System Settings → Internet Accounts)
-- Ability to create a Slack app in your workspace
-
-## 1. Create the Slack app
-
-1. Go to [api.slack.com/apps](https://api.slack.com/apps) → **Create New App** → From scratch.
-2. Under **OAuth & Permissions** → **User Token Scopes**, add:
-   - `users.profile:write`
-   - `dnd:write`
-3. Install the app to your workspace.
-4. Copy the **User OAuth Token** (`xoxp-...`).
-
-No bot token, Event Subscriptions, or Socket Mode are required.
-
-## 2. Confirm Calendar.app can see your work events
-
-1. Open **Calendar.app**.
-2. Ensure your Exchange / Microsoft 365 calendar is listed and events appear.
-3. If missing: **System Settings → Internet Accounts → Add Account → Microsoft Exchange** (or your company account).
-
-The sync tool reads Calendar.app, not the Outlook for Mac UI database.
-
-## 3. Install and configure
+Calendar permission survives rebuilds only when you sign with a **stable** certificate (not ad-hoc).
 
 ```bash
-cd slack-status-sync
 npm install
-npm run build
-npm run dev -- init
+npm run setup:signing
 ```
 
-Edit `~/.slack-status-sync/config.yaml`:
-
-```yaml
-# Optional allowlist of Calendar.app calendar titles
-# calendarNames:
-#   - "Calendar"
-
-rules:
-  - eventNameContains: "Focus"   # case-insensitive substring of event title
-    status: "Focusing"
-    emoji: ":dart:"
-    notifications: snooze        # snooze | normal
-    priority: 10                 # lower wins on overlap
-```
-
-## 4. Authorize Calendar + Slack
+Then open **Keychain Access**, find **Slack Status Sync Local**, Get Info → Trust → set **Code Signing** to **Always Trust**. Authenticate when prompted, then confirm:
 
 ```bash
-npm run build
-npm run calendar:authorize   # opens Slack Status Sync Calendar.app
-npm run calendar:list        # confirm calendars + upcoming titles
-npm run auth:slack           # paste your xoxp- user token
+npm run setup:signing
 ```
 
-`calendar authorize` opens a small helper app window and requests **Full Access**. After you allow it, look for **Slack Status Sync Calendar** under:
+Keep that certificate. Rotating or deleting it will require re-approving Calendar access.
 
-**System Settings → Privacy & Security → Calendars**
-
-Bare CLI binaries usually never appear in that list on macOS 15; the `.app` bundle is required.
-
-If the app does not appear after clicking Allow / Request Access:
+## Build and install
 
 ```bash
-npm run calendar:authorize -- --open-settings
-open "$HOME/Applications/Slack Status Sync Calendar.app"
+npm run build          # dist/Slack Status Sync.app (signed)
+npm run install:app    # copies to /Applications (may ask for admin password)
 ```
 
-Then toggle Full Access for **Slack Status Sync Calendar** and re-check with `npm run calendar:list`.
+`install:app` also:
 
-**Why `calendar:list` can still say `notDetermined` after approving**
+- Removes the legacy CLI launchd agent and `~/Applications/Slack Status Sync Calendar.app`
+- Deletes `~/.slack-status-sync` and the old Keychain token (fresh start)
+- Opens the app
 
-Two separate issues:
+Install into **`/Applications`** so Launch at Login (`SMAppService`) and Calendar TCC stay on a stable path.
 
-1. Node/Cursor child processes do not inherit the `.app` Calendar grant. This tool launches EventKit work with `open -a` against `~/Applications/Slack Status Sync Calendar.app`.
-2. The app is **ad-hoc signed**. Each `npm run build` changes the binary hash, so an existing Settings toggle can look “on” while EventKit still reports `notDetermined` for the new binary.
+## First run
 
-Reset and re-approve against the current app **without rebuilding in between**:
+1. The Settings window opens automatically.
+2. Click **Request Access** and grant **Full Access** to calendars.
+3. Paste your Slack user token (`xoxp-…`). It is stored in Keychain and shown only as a fixed mask later.
+4. Allow error notifications so persistent sync failures are visible.
+5. Check the calendars that may update Slack. All visible calendars are selected on a fresh setup; selecting none disables calendar syncing.
+6. Adjust rules (drag to set priority — top wins) and poll interval.
+7. Click **Save** — settings apply immediately and a sync runs (unless paused).
+8. Launch at Login is enabled by default when the app runs from `/Applications`.
+
+## Status menu
+
+| Item | Meaning |
+|------|---------|
+| Last Slack update | Last time status/DND was successfully changed |
+| Last poll | Last completed calendar poll |
+| Error / Status | Current health |
+| Sync Now | Immediate idempotent poll |
+| Pause / Resume | Session-only; resumes automatically on next launch |
+| Settings… | Structured settings form |
+| Quit | Stop the app |
+
+## Settings storage
+
+| Data | Location |
+|------|----------|
+| Settings | `~/Library/Application Support/Slack Status Sync/settings.json` |
+| Sync state | `~/Library/Application Support/Slack Status Sync/state.json` |
+| Logs | `~/Library/Application Support/Slack Status Sync/sync.log` |
+| Slack token | Keychain service `com.slack-status-sync.app` |
+
+There is no YAML config or terminal CLI anymore.
+
+## Slack app setup
+
+1. [api.slack.com/apps](https://api.slack.com/apps) → Create New App → From scratch.
+2. **OAuth & Permissions** → User Token Scopes: `users.profile:write`, `dnd:write`.
+3. Install to your workspace and copy the **User OAuth Token**.
+
+## Rebuilds and Calendar permission
+
+Rebuild and reinstall with the **same** signing certificate and bundle ID (`com.slack-status-sync.app`):
 
 ```bash
-npm run build
-tccutil reset Calendar com.slack-status-sync.calendar-reader
-open "$HOME/Applications/Slack Status Sync Calendar.app"
-# Allow Full Access. The window must show "Visible calendars: N" with N > 0.
-npm run calendar:status   # should show authorized: true
-npm run calendar:list
+npm run build && npm run install:app
+npm run verify:identity
+npm run verify:rebuild   # builds twice and compares designated requirements
 ```
 
-## 5. Test once
+`verify:identity` fails if the designated requirement becomes cdhash-anchored (ad-hoc) or drifts from the stored baseline.
+
+If Calendar access is lost (certificate rotated, TCC reset, or wrong path):
 
 ```bash
-npm run sync -- --dry-run   # select only; no Slack writes
-npm run sync                # apply if an eligible event is active/starting
+tccutil reset Calendar com.slack-status-sync.app
+open -a "/Applications/Slack Status Sync.app"
 ```
 
-## 6. Run continuously
-
-Foreground:
-
-```bash
-npm run run
-```
-
-At login via launchd:
-
-```bash
-chmod +x scripts/install-launchd.sh scripts/uninstall-launchd.sh
-./scripts/install-launchd.sh
-```
-
-**Important:** run `calendar authorize` and verify `calendar list` interactively **before** installing launchd. Background agents cannot show the first TCC prompt reliably.
-
-Logs go to `~/.slack-status-sync/sync.log` via launchd stdout/stderr redirection. Use `--log-file` only for interactive runs when you also want a file copy; combining it with launchd redirection duplicates lines.
-
-Unload:
-
-```bash
-./scripts/uninstall-launchd.sh
-```
-
-## Sync rules
-
-| Situation | Behavior |
-|---|---|
-| Title-matched event becomes active (start crossed since last poll) | Apply status + notifications once |
-| Startup / first poll with an active unmatched-handled event | Apply highest-priority active matched event |
-| Same event still active; you changed Slack manually | No further updates for that event |
-| Event ends | No cleanup API call; Slack status expiry / snooze duration clear it |
-| Later matched event starts | Apply and override previous automation/manual state |
-| Overlapping starts in the same poll | Lowest `priority` wins, then earliest start, then rule text |
-| Cancelled or declined events | Ignored |
-
-Status expiry and DND snooze are set to the event end time.
-
-Title matching is a **trimmed, case-insensitive substring** of the event title.
-
-## CLI
-
-```text
-slack-status-sync init
-slack-status-sync calendar authorize
-slack-status-sync calendar status
-slack-status-sync calendar list [--hours 24]
-slack-status-sync auth slack
-slack-status-sync sync [--dry-run]
-slack-status-sync run
-slack-status-sync logout [slack|all]
-```
-
-Useful flags:
-
-- `--config <path>`
-- `--verbose`
-- `--log-file <path>`
-
-Environment:
-
-- `SLACK_STATUS_SYNC_CONFIG` — config path override
-- `SLACK_USER_TOKEN` — non-interactive Slack auth
-
-## Troubleshooting
-
-| Symptom | Fix |
-|---|---|
-| `Calendar helper not found` | Run `npm run build` |
-| `permission_denied` / empty calendars | Run `calendar authorize`; check System Settings → Privacy & Security → Calendars |
-| No work events in `calendar list` | Add the Exchange account to Calendar.app (not only Outlook) |
-| `Slack token not found` | Run `auth slack` |
-| Status never changes | Confirm title substring matches; event must not be declined/cancelled; check logs |
-| launchd cannot read calendars | Re-run authorize in Terminal; grant Calendar access to `dist/calendar-reader` and/or Node |
-| Want a clean slate | `node dist/cli.js logout all` and delete `~/.slack-status-sync/state.json` |
+Then use **Request Access** in Settings again.
 
 ## Development
 
 ```bash
-npm test
+npm run test:all
 npm run typecheck
-npm run build
-./dist/calendar-reader help
+npm run smoke
+npm run dev:sidecar   # NDJSON protocol on stdin/stdout (for debugging)
 ```
 
-## Privacy
+The native checks use a compiled Swift harness because standalone Xcode Command
+Line Tools installations do not include XCTest. Calendar permission persistence
+must still be accepted manually on a real Mac after rebuilding and reinstalling.
 
-Structured logs include event IDs, matched rule text, calendar names, and outcomes. Full event **titles** and tokens are omitted/redacted from logs. `calendar list` prints titles on purpose so you can craft match rules.
+## Manual acceptance checklist
+
+After installing a new build:
+
+- Request Calendar access and confirm the status changes to **Full Access** and calendar checkboxes appear.
+- Enter an invalid Slack token and confirm Save rejects it without replacing an existing token; then save a valid token.
+- Edit every rule field, drag rules into a new order, toggle calendars (including Select None), save, and reopen Settings.
+- Confirm Save resets the poll timer and performs an immediate sync, while Save during Pause does not sync.
+- Quit and relaunch; confirm the last poll/update telemetry is restored and Pause has reset.
+- Confirm Sync Now, Pause/Resume, Settings, Quit, error notifications, sleep/wake recovery, and Launch at Login.
+- Run `npm run verify:rebuild`, reinstall, and confirm Calendar remains authorized without another prompt.
+
+Architecture:
+
+```mermaid
+flowchart LR
+  MenuBar[Swift menu-bar app] -->|EventKit| Calendar[Calendar.app]
+  MenuBar -->|NDJSON stdin/stdout| Sidecar[Bundled Node SEA core]
+  Sidecar -->|users.profile.set / dnd| Slack[Slack API]
+  MenuBar -->|Keychain| Token[Slack token]
+```
 
 ## License
 
