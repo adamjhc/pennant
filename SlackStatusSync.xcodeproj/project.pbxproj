@@ -1,0 +1,519 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0EFE6B8550065712AA558B0E /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7534FA0D67143B3D192BFA /* SettingsViewModelTests.swift */; };
+		15FB73D50350D5B2CF4E5A5E /* DateProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7B8A8D3975DAF62E7B16FE /* DateProviding.swift */; };
+		1BB122261F2309DF3690ED5B /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65BA65E4056D3E9B9403C6EB /* CalendarService.swift */; };
+		1CE2F3362C284C1A0798BE0B /* SlackClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A774A81F1F3001D9C11B783 /* SlackClient.swift */; };
+		2CB20DAFDE8415C164D80B70 /* EventKitCalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8601BB154FB5E103A374132 /* EventKitCalendarService.swift */; };
+		33B2F678A938A0B6B11FFF23 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0AACB8D5A5FDF66A2E5B0657 /* Assets.xcassets */; };
+		33FBBDE0664024EB56560BCB /* RuleValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0FAA0109B7ED5A092E6270 /* RuleValidator.swift */; };
+		39F014E371EBB3F109DBA79D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12BFA8E6E73D0CA76FF1F89B /* SettingsView.swift */; };
+		4A223624AAA4D4834237315D /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 111AA84EDA0B41231412BEFF /* AppModel.swift */; };
+		6433753B5948FC4F64C0BD73 /* CalendarMappingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02D46A52042B2D47EFD76689 /* CalendarMappingTests.swift */; };
+		707EE46ED28E8637CDD8098A /* SettingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C186FAC1FCB4072646758676 /* SettingsModels.swift */; };
+		74CCB87E04378FCB0B50A9FC /* DecisionEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E46B4B55C0E9215515C8252 /* DecisionEngine.swift */; };
+		75E636F037F6671CF6974B0B /* KeychainTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = F76E8FF828CABF5EC7C99B15 /* KeychainTokenStore.swift */; };
+		8FAACBE3275C99BC90715948 /* SyncCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5890853553AD784CF7E397F4 /* SyncCoordinator.swift */; };
+		A41078684199560AD186C417 /* LaunchAtLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782E715AA3C7038C8F4A460C /* LaunchAtLoginService.swift */; };
+		A4D70CBFEB0B8C6B2C40891C /* SlackActionExecutor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B96A0353D6E9F78A166D3B /* SlackActionExecutor.swift */; };
+		B2F4B72A5DF90B195C07BBED /* AppLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8428E96FE9CAA4E276551351 /* AppLogger.swift */; };
+		B6F9C3FD397BEE5F0E6F5C0E /* PersistenceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191ED6B2D9A6410832536CF9 /* PersistenceTests.swift */; };
+		B84F70034E1A064EB8ED87B2 /* StatusMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A68CDB4C3205804E82741D1F /* StatusMenuView.swift */; };
+		CC060DD8382D0CB564D7841F /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6443656BAA2988BE349F275F /* Models.swift */; };
+		D500408DAD253E7C1D49F40A /* DecisionEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CA82DCDB0836EC7BD3E984 /* DecisionEngineTests.swift */; };
+		D7BE2D3A2EA778761E3645B7 /* SlackClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80602E481638BDC066DBD71 /* SlackClientTests.swift */; };
+		E864691B2554ED5A6E970741 /* SlackActionExecutorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957832503CE1012026F7B1F1 /* SlackActionExecutorTests.swift */; };
+		EFCD80373357FAAF890AF182 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC18DBF1D08A101EA2EC4AD /* SettingsViewModel.swift */; };
+		FB34CAF4594DAB2863EA9CC1 /* Stores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7C7063091EE365379CACD8 /* Stores.swift */; };
+		FBD4F58AC4D81EB3348B5D19 /* SyncCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7415C92F064A9BB4B2AFFF4 /* SyncCoordinatorTests.swift */; };
+		FE5091E44CAAB550638FFED6 /* SlackStatusSyncApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD06B53158A63B47AB1711 /* SlackStatusSyncApp.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		431387EB7262E1CFC79B125E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 46F86FAA6BBF9AC94A7E4595 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6439CF22188FA14BBD363342;
+			remoteInfo = SlackStatusSync;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		02D46A52042B2D47EFD76689 /* CalendarMappingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarMappingTests.swift; sourceTree = "<group>"; };
+		0AACB8D5A5FDF66A2E5B0657 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0F0FAA0109B7ED5A092E6270 /* RuleValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleValidator.swift; sourceTree = "<group>"; };
+		111AA84EDA0B41231412BEFF /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		12BFA8E6E73D0CA76FF1F89B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		191ED6B2D9A6410832536CF9 /* PersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceTests.swift; sourceTree = "<group>"; };
+		195F9293022CEE80C9E8D0C0 /* SlackStatusSyncTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlackStatusSyncTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C7B8A8D3975DAF62E7B16FE /* DateProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateProviding.swift; sourceTree = "<group>"; };
+		5890853553AD784CF7E397F4 /* SyncCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncCoordinator.swift; sourceTree = "<group>"; };
+		6443656BAA2988BE349F275F /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		65BA65E4056D3E9B9403C6EB /* CalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
+		782E715AA3C7038C8F4A460C /* LaunchAtLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLoginService.swift; sourceTree = "<group>"; };
+		7A774A81F1F3001D9C11B783 /* SlackClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackClient.swift; sourceTree = "<group>"; };
+		7A7C7063091EE365379CACD8 /* Stores.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stores.swift; sourceTree = "<group>"; };
+		7BCCADA3021C07D12E775CB5 /* Slack Status Sync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Slack Status Sync.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8428E96FE9CAA4E276551351 /* AppLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogger.swift; sourceTree = "<group>"; };
+		8E46B4B55C0E9215515C8252 /* DecisionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionEngine.swift; sourceTree = "<group>"; };
+		957832503CE1012026F7B1F1 /* SlackActionExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackActionExecutorTests.swift; sourceTree = "<group>"; };
+		99B96A0353D6E9F78A166D3B /* SlackActionExecutor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackActionExecutor.swift; sourceTree = "<group>"; };
+		A68CDB4C3205804E82741D1F /* StatusMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusMenuView.swift; sourceTree = "<group>"; };
+		A80602E481638BDC066DBD71 /* SlackClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackClientTests.swift; sourceTree = "<group>"; };
+		B7415C92F064A9BB4B2AFFF4 /* SyncCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncCoordinatorTests.swift; sourceTree = "<group>"; };
+		C186FAC1FCB4072646758676 /* SettingsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModels.swift; sourceTree = "<group>"; };
+		EC7534FA0D67143B3D192BFA /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
+		ECDD06B53158A63B47AB1711 /* SlackStatusSyncApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackStatusSyncApp.swift; sourceTree = "<group>"; };
+		EEC18DBF1D08A101EA2EC4AD /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		F3CA82DCDB0836EC7BD3E984 /* DecisionEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionEngineTests.swift; sourceTree = "<group>"; };
+		F76E8FF828CABF5EC7C99B15 /* KeychainTokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainTokenStore.swift; sourceTree = "<group>"; };
+		F8601BB154FB5E103A374132 /* EventKitCalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventKitCalendarService.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B437C18B32F9AAF6E1000F6C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F4BF190A585A2F3C168DAF2D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2CB96E321EB81ECBF7E0AB83 /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				8E46B4B55C0E9215515C8252 /* DecisionEngine.swift */,
+				0F0FAA0109B7ED5A092E6270 /* RuleValidator.swift */,
+				99B96A0353D6E9F78A166D3B /* SlackActionExecutor.swift */,
+			);
+			path = Engine;
+			sourceTree = "<group>";
+		};
+		37118FDE0D01854758D27EDC /* System */ = {
+			isa = PBXGroup;
+			children = (
+				8428E96FE9CAA4E276551351 /* AppLogger.swift */,
+				3C7B8A8D3975DAF62E7B16FE /* DateProviding.swift */,
+				782E715AA3C7038C8F4A460C /* LaunchAtLoginService.swift */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
+		516831D832DDC7318520265A /* SlackStatusSyncTests */ = {
+			isa = PBXGroup;
+			children = (
+				02D46A52042B2D47EFD76689 /* CalendarMappingTests.swift */,
+				F3CA82DCDB0836EC7BD3E984 /* DecisionEngineTests.swift */,
+				191ED6B2D9A6410832536CF9 /* PersistenceTests.swift */,
+				EC7534FA0D67143B3D192BFA /* SettingsViewModelTests.swift */,
+				957832503CE1012026F7B1F1 /* SlackActionExecutorTests.swift */,
+				A80602E481638BDC066DBD71 /* SlackClientTests.swift */,
+				B7415C92F064A9BB4B2AFFF4 /* SyncCoordinatorTests.swift */,
+			);
+			path = SlackStatusSyncTests;
+			sourceTree = "<group>";
+		};
+		5928955287B8089ED2177128 = {
+			isa = PBXGroup;
+			children = (
+				7B98812A3DAB90CBA56EB320 /* SlackStatusSync */,
+				516831D832DDC7318520265A /* SlackStatusSyncTests */,
+				86024CAD1E83101D97359D73 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7B98812A3DAB90CBA56EB320 /* SlackStatusSync */ = {
+			isa = PBXGroup;
+			children = (
+				ECDD06B53158A63B47AB1711 /* SlackStatusSyncApp.swift */,
+				0AACB8D5A5FDF66A2E5B0657 /* Assets.xcassets */,
+				8E363C0AEC38DB196802E77A /* Calendar */,
+				C98A10DC8B719C27370645E1 /* Coordination */,
+				A60DDAD58A112FABC77E852E /* Domain */,
+				2CB96E321EB81ECBF7E0AB83 /* Engine */,
+				F225E6C813F1D6F0B300BB3D /* Persistence */,
+				DF22304915F95EE6D5EA212F /* Slack */,
+				37118FDE0D01854758D27EDC /* System */,
+				8ED6C0FD8C23B473263C95C6 /* Views */,
+			);
+			path = SlackStatusSync;
+			sourceTree = "<group>";
+		};
+		86024CAD1E83101D97359D73 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7BCCADA3021C07D12E775CB5 /* Slack Status Sync.app */,
+				195F9293022CEE80C9E8D0C0 /* SlackStatusSyncTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8E363C0AEC38DB196802E77A /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				65BA65E4056D3E9B9403C6EB /* CalendarService.swift */,
+				F8601BB154FB5E103A374132 /* EventKitCalendarService.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		8ED6C0FD8C23B473263C95C6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				111AA84EDA0B41231412BEFF /* AppModel.swift */,
+				12BFA8E6E73D0CA76FF1F89B /* SettingsView.swift */,
+				A68CDB4C3205804E82741D1F /* StatusMenuView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A60DDAD58A112FABC77E852E /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				6443656BAA2988BE349F275F /* Models.swift */,
+				C186FAC1FCB4072646758676 /* SettingsModels.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		C98A10DC8B719C27370645E1 /* Coordination */ = {
+			isa = PBXGroup;
+			children = (
+				EEC18DBF1D08A101EA2EC4AD /* SettingsViewModel.swift */,
+				5890853553AD784CF7E397F4 /* SyncCoordinator.swift */,
+			);
+			path = Coordination;
+			sourceTree = "<group>";
+		};
+		DF22304915F95EE6D5EA212F /* Slack */ = {
+			isa = PBXGroup;
+			children = (
+				7A774A81F1F3001D9C11B783 /* SlackClient.swift */,
+			);
+			path = Slack;
+			sourceTree = "<group>";
+		};
+		F225E6C813F1D6F0B300BB3D /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				F76E8FF828CABF5EC7C99B15 /* KeychainTokenStore.swift */,
+				7A7C7063091EE365379CACD8 /* Stores.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6439CF22188FA14BBD363342 /* SlackStatusSync */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD616C6EFB25E4F57A09FEDE /* Build configuration list for PBXNativeTarget "SlackStatusSync" */;
+			buildPhases = (
+				0F2A33C9B352E389BDBCF3E8 /* Sources */,
+				F4BF190A585A2F3C168DAF2D /* Frameworks */,
+				291A891547850556A1912B92 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SlackStatusSync;
+			productName = "Slack Status Sync";
+			productReference = 7BCCADA3021C07D12E775CB5 /* Slack Status Sync.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BA128F9D3C0D15FFB32AEEA8 /* SlackStatusSyncTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9148F3BC3952FE9BA52C33A8 /* Build configuration list for PBXNativeTarget "SlackStatusSyncTests" */;
+			buildPhases = (
+				553E488A9666BA2F94A15605 /* Sources */,
+				B437C18B32F9AAF6E1000F6C /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8117409116AE93B7698D0780 /* PBXTargetDependency */,
+			);
+			name = SlackStatusSyncTests;
+			productName = SlackStatusSyncTests;
+			productReference = 195F9293022CEE80C9E8D0C0 /* SlackStatusSyncTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		46F86FAA6BBF9AC94A7E4595 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					6439CF22188FA14BBD363342 = {
+						CreatedOnToolsVersion = 16.0;
+					};
+					BA128F9D3C0D15FFB32AEEA8 = {
+						CreatedOnToolsVersion = 16.0;
+						TestTargetID = 6439CF22188FA14BBD363342;
+					};
+				};
+			};
+			buildConfigurationList = 4623F89214148A3820E2F59A /* Build configuration list for PBXProject "SlackStatusSync" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5928955287B8089ED2177128;
+			productRefGroup = 86024CAD1E83101D97359D73 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6439CF22188FA14BBD363342 /* SlackStatusSync */,
+				BA128F9D3C0D15FFB32AEEA8 /* SlackStatusSyncTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		291A891547850556A1912B92 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33B2F678A938A0B6B11FFF23 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0F2A33C9B352E389BDBCF3E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1BB122261F2309DF3690ED5B /* CalendarService.swift in Sources */,
+				2CB20DAFDE8415C164D80B70 /* EventKitCalendarService.swift in Sources */,
+				EFCD80373357FAAF890AF182 /* SettingsViewModel.swift in Sources */,
+				8FAACBE3275C99BC90715948 /* SyncCoordinator.swift in Sources */,
+				CC060DD8382D0CB564D7841F /* Models.swift in Sources */,
+				707EE46ED28E8637CDD8098A /* SettingsModels.swift in Sources */,
+				74CCB87E04378FCB0B50A9FC /* DecisionEngine.swift in Sources */,
+				33FBBDE0664024EB56560BCB /* RuleValidator.swift in Sources */,
+				A4D70CBFEB0B8C6B2C40891C /* SlackActionExecutor.swift in Sources */,
+				75E636F037F6671CF6974B0B /* KeychainTokenStore.swift in Sources */,
+				FB34CAF4594DAB2863EA9CC1 /* Stores.swift in Sources */,
+				1CE2F3362C284C1A0798BE0B /* SlackClient.swift in Sources */,
+				FE5091E44CAAB550638FFED6 /* SlackStatusSyncApp.swift in Sources */,
+				B2F4B72A5DF90B195C07BBED /* AppLogger.swift in Sources */,
+				15FB73D50350D5B2CF4E5A5E /* DateProviding.swift in Sources */,
+				A41078684199560AD186C417 /* LaunchAtLoginService.swift in Sources */,
+				4A223624AAA4D4834237315D /* AppModel.swift in Sources */,
+				39F014E371EBB3F109DBA79D /* SettingsView.swift in Sources */,
+				B84F70034E1A064EB8ED87B2 /* StatusMenuView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		553E488A9666BA2F94A15605 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6433753B5948FC4F64C0BD73 /* CalendarMappingTests.swift in Sources */,
+				D500408DAD253E7C1D49F40A /* DecisionEngineTests.swift in Sources */,
+				B6F9C3FD397BEE5F0E6F5C0E /* PersistenceTests.swift in Sources */,
+				0EFE6B8550065712AA558B0E /* SettingsViewModelTests.swift in Sources */,
+				E864691B2554ED5A6E970741 /* SlackActionExecutorTests.swift in Sources */,
+				D7BE2D3A2EA778761E3645B7 /* SlackClientTests.swift in Sources */,
+				FBD4F58AC4D81EB3348B5D19 /* SyncCoordinatorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8117409116AE93B7698D0780 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6439CF22188FA14BBD363342 /* SlackStatusSync */;
+			targetProxy = 431387EB7262E1CFC79B125E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0F9FC8EE2C99E07A9753399D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SlackStatusSync/SlackStatusSync.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 86CB3GP2UH;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = SlackStatusSync/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.local.SlackStatusSync;
+				PRODUCT_MODULE_NAME = SlackStatusSync;
+				PRODUCT_NAME = "Slack Status Sync";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+			};
+			name = Debug;
+		};
+		1483FA26082F598A11F242FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SlackStatusSync/SlackStatusSync.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 86CB3GP2UH;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = SlackStatusSync/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.local.SlackStatusSync;
+				PRODUCT_MODULE_NAME = SlackStatusSync;
+				PRODUCT_NAME = "Slack Status Sync";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+			};
+			name = Release;
+		};
+		7BF40F069D95C38DE60AA602 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				ONLY_ACTIVE_ARCH = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		7CB61F3D2D3B2A7FBA3915B0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.local.SlackStatusSyncTests;
+				PRODUCT_NAME = SlackStatusSyncTests;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Slack Status Sync.app/Contents/MacOS/Slack Status Sync";
+			};
+			name = Debug;
+		};
+		C3B1D3E1EA0DF0CA96EE4015 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.local.SlackStatusSyncTests;
+				PRODUCT_NAME = SlackStatusSyncTests;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Slack Status Sync.app/Contents/MacOS/Slack Status Sync";
+			};
+			name = Release;
+		};
+		EC86DC4F4B4C60C3EC031655 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=1";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4623F89214148A3820E2F59A /* Build configuration list for PBXProject "SlackStatusSync" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC86DC4F4B4C60C3EC031655 /* Debug */,
+				7BF40F069D95C38DE60AA602 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9148F3BC3952FE9BA52C33A8 /* Build configuration list for PBXNativeTarget "SlackStatusSyncTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7CB61F3D2D3B2A7FBA3915B0 /* Debug */,
+				C3B1D3E1EA0DF0CA96EE4015 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CD616C6EFB25E4F57A09FEDE /* Build configuration list for PBXNativeTarget "SlackStatusSync" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0F9FC8EE2C99E07A9753399D /* Debug */,
+				1483FA26082F598A11F242FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 46F86FAA6BBF9AC94A7E4595 /* Project object */;
+}
