@@ -33,7 +33,7 @@
 		EFCD80373357FAAF890AF182 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEC18DBF1D08A101EA2EC4AD /* SettingsViewModel.swift */; };
 		FB34CAF4594DAB2863EA9CC1 /* Stores.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7C7063091EE365379CACD8 /* Stores.swift */; };
 		FBD4F58AC4D81EB3348B5D19 /* SyncCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7415C92F064A9BB4B2AFFF4 /* SyncCoordinatorTests.swift */; };
-		FE5091E44CAAB550638FFED6 /* SlackStatusSyncApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD06B53158A63B47AB1711 /* SlackStatusSyncApp.swift */; };
+		FE5091E44CAAB550638FFED6 /* PennantApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECDD06B53158A63B47AB1711 /* PennantApp.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +42,7 @@
 			containerPortal = 46F86FAA6BBF9AC94A7E4595 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 6439CF22188FA14BBD363342;
-			remoteInfo = SlackStatusSync;
+			remoteInfo = Pennant;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -53,7 +53,7 @@
 		111AA84EDA0B41231412BEFF /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		12BFA8E6E73D0CA76FF1F89B /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		191ED6B2D9A6410832536CF9 /* PersistenceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceTests.swift; sourceTree = "<group>"; };
-		195F9293022CEE80C9E8D0C0 /* SlackStatusSyncTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SlackStatusSyncTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		195F9293022CEE80C9E8D0C0 /* PennantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PennantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C7B8A8D3975DAF62E7B16FE /* DateProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateProviding.swift; sourceTree = "<group>"; };
 		5890853553AD784CF7E397F4 /* SyncCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncCoordinator.swift; sourceTree = "<group>"; };
 		6443656BAA2988BE349F275F /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
@@ -61,7 +61,7 @@
 		782E715AA3C7038C8F4A460C /* LaunchAtLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLoginService.swift; sourceTree = "<group>"; };
 		7A774A81F1F3001D9C11B783 /* SlackClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackClient.swift; sourceTree = "<group>"; };
 		7A7C7063091EE365379CACD8 /* Stores.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stores.swift; sourceTree = "<group>"; };
-		7BCCADA3021C07D12E775CB5 /* Slack Status Sync.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Slack Status Sync.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BCCADA3021C07D12E775CB5 /* Pennant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pennant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8428E96FE9CAA4E276551351 /* AppLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLogger.swift; sourceTree = "<group>"; };
 		8E46B4B55C0E9215515C8252 /* DecisionEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionEngine.swift; sourceTree = "<group>"; };
 		957832503CE1012026F7B1F1 /* SlackActionExecutorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackActionExecutorTests.swift; sourceTree = "<group>"; };
@@ -71,7 +71,7 @@
 		B7415C92F064A9BB4B2AFFF4 /* SyncCoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncCoordinatorTests.swift; sourceTree = "<group>"; };
 		C186FAC1FCB4072646758676 /* SettingsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModels.swift; sourceTree = "<group>"; };
 		EC7534FA0D67143B3D192BFA /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
-		ECDD06B53158A63B47AB1711 /* SlackStatusSyncApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlackStatusSyncApp.swift; sourceTree = "<group>"; };
+		ECDD06B53158A63B47AB1711 /* PennantApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PennantApp.swift; sourceTree = "<group>"; };
 		EEC18DBF1D08A101EA2EC4AD /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		F3CA82DCDB0836EC7BD3E984 /* DecisionEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionEngineTests.swift; sourceTree = "<group>"; };
 		F76E8FF828CABF5EC7C99B15 /* KeychainTokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainTokenStore.swift; sourceTree = "<group>"; };
@@ -116,7 +116,7 @@
 			path = System;
 			sourceTree = "<group>";
 		};
-		516831D832DDC7318520265A /* SlackStatusSyncTests */ = {
+		516831D832DDC7318520265A /* PennantTests */ = {
 			isa = PBXGroup;
 			children = (
 				02D46A52042B2D47EFD76689 /* CalendarMappingTests.swift */,
@@ -127,22 +127,22 @@
 				A80602E481638BDC066DBD71 /* SlackClientTests.swift */,
 				B7415C92F064A9BB4B2AFFF4 /* SyncCoordinatorTests.swift */,
 			);
-			path = SlackStatusSyncTests;
+			path = PennantTests;
 			sourceTree = "<group>";
 		};
 		5928955287B8089ED2177128 = {
 			isa = PBXGroup;
 			children = (
-				7B98812A3DAB90CBA56EB320 /* SlackStatusSync */,
-				516831D832DDC7318520265A /* SlackStatusSyncTests */,
+				7B98812A3DAB90CBA56EB320 /* Pennant */,
+				516831D832DDC7318520265A /* PennantTests */,
 				86024CAD1E83101D97359D73 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		7B98812A3DAB90CBA56EB320 /* SlackStatusSync */ = {
+		7B98812A3DAB90CBA56EB320 /* Pennant */ = {
 			isa = PBXGroup;
 			children = (
-				ECDD06B53158A63B47AB1711 /* SlackStatusSyncApp.swift */,
+				ECDD06B53158A63B47AB1711 /* PennantApp.swift */,
 				0AACB8D5A5FDF66A2E5B0657 /* Assets.xcassets */,
 				8E363C0AEC38DB196802E77A /* Calendar */,
 				C98A10DC8B719C27370645E1 /* Coordination */,
@@ -153,14 +153,14 @@
 				37118FDE0D01854758D27EDC /* System */,
 				8ED6C0FD8C23B473263C95C6 /* Views */,
 			);
-			path = SlackStatusSync;
+			path = Pennant;
 			sourceTree = "<group>";
 		};
 		86024CAD1E83101D97359D73 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7BCCADA3021C07D12E775CB5 /* Slack Status Sync.app */,
-				195F9293022CEE80C9E8D0C0 /* SlackStatusSyncTests.xctest */,
+				7BCCADA3021C07D12E775CB5 /* Pennant.app */,
+				195F9293022CEE80C9E8D0C0 /* PennantTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -222,9 +222,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6439CF22188FA14BBD363342 /* SlackStatusSync */ = {
+		6439CF22188FA14BBD363342 /* Pennant */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CD616C6EFB25E4F57A09FEDE /* Build configuration list for PBXNativeTarget "SlackStatusSync" */;
+			buildConfigurationList = CD616C6EFB25E4F57A09FEDE /* Build configuration list for PBXNativeTarget "Pennant" */;
 			buildPhases = (
 				0F2A33C9B352E389BDBCF3E8 /* Sources */,
 				F4BF190A585A2F3C168DAF2D /* Frameworks */,
@@ -234,14 +234,14 @@
 			);
 			dependencies = (
 			);
-			name = SlackStatusSync;
-			productName = "Slack Status Sync";
-			productReference = 7BCCADA3021C07D12E775CB5 /* Slack Status Sync.app */;
+			name = Pennant;
+			productName = "Pennant";
+			productReference = 7BCCADA3021C07D12E775CB5 /* Pennant.app */;
 			productType = "com.apple.product-type.application";
 		};
-		BA128F9D3C0D15FFB32AEEA8 /* SlackStatusSyncTests */ = {
+		BA128F9D3C0D15FFB32AEEA8 /* PennantTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9148F3BC3952FE9BA52C33A8 /* Build configuration list for PBXNativeTarget "SlackStatusSyncTests" */;
+			buildConfigurationList = 9148F3BC3952FE9BA52C33A8 /* Build configuration list for PBXNativeTarget "PennantTests" */;
 			buildPhases = (
 				553E488A9666BA2F94A15605 /* Sources */,
 				B437C18B32F9AAF6E1000F6C /* Frameworks */,
@@ -251,9 +251,9 @@
 			dependencies = (
 				8117409116AE93B7698D0780 /* PBXTargetDependency */,
 			);
-			name = SlackStatusSyncTests;
-			productName = SlackStatusSyncTests;
-			productReference = 195F9293022CEE80C9E8D0C0 /* SlackStatusSyncTests.xctest */;
+			name = PennantTests;
+			productName = PennantTests;
+			productReference = 195F9293022CEE80C9E8D0C0 /* PennantTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -275,7 +275,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4623F89214148A3820E2F59A /* Build configuration list for PBXProject "SlackStatusSync" */;
+			buildConfigurationList = 4623F89214148A3820E2F59A /* Build configuration list for PBXProject "Pennant" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -288,8 +288,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6439CF22188FA14BBD363342 /* SlackStatusSync */,
-				BA128F9D3C0D15FFB32AEEA8 /* SlackStatusSyncTests */,
+				6439CF22188FA14BBD363342 /* Pennant */,
+				BA128F9D3C0D15FFB32AEEA8 /* PennantTests */,
 			);
 		};
 /* End PBXProject section */
@@ -322,7 +322,7 @@
 				75E636F037F6671CF6974B0B /* KeychainTokenStore.swift in Sources */,
 				FB34CAF4594DAB2863EA9CC1 /* Stores.swift in Sources */,
 				1CE2F3362C284C1A0798BE0B /* SlackClient.swift in Sources */,
-				FE5091E44CAAB550638FFED6 /* SlackStatusSyncApp.swift in Sources */,
+				FE5091E44CAAB550638FFED6 /* PennantApp.swift in Sources */,
 				B2F4B72A5DF90B195C07BBED /* AppLogger.swift in Sources */,
 				15FB73D50350D5B2CF4E5A5E /* DateProviding.swift in Sources */,
 				A41078684199560AD186C417 /* LaunchAtLoginService.swift in Sources */,
@@ -351,7 +351,7 @@
 /* Begin PBXTargetDependency section */
 		8117409116AE93B7698D0780 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6439CF22188FA14BBD363342 /* SlackStatusSync */;
+			target = 6439CF22188FA14BBD363342 /* Pennant */;
 			targetProxy = 431387EB7262E1CFC79B125E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -361,7 +361,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = SlackStatusSync/SlackStatusSync.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Pennant/Pennant.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -369,15 +369,15 @@
 				DEVELOPMENT_TEAM = 86CB3GP2UH;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = SlackStatusSync/Info.plist;
+				INFOPLIST_FILE = Pennant/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.local.SlackStatusSync;
-				PRODUCT_MODULE_NAME = SlackStatusSync;
-				PRODUCT_NAME = "Slack Status Sync";
+				PRODUCT_BUNDLE_IDENTIFIER = dev.local.Pennant;
+				PRODUCT_MODULE_NAME = Pennant;
+				PRODUCT_NAME = "Pennant";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 			};
 			name = Debug;
@@ -386,7 +386,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = SlackStatusSync/SlackStatusSync.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Pennant/Pennant.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -394,15 +394,15 @@
 				DEVELOPMENT_TEAM = 86CB3GP2UH;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = SlackStatusSync/Info.plist;
+				INFOPLIST_FILE = Pennant/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 1.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.local.SlackStatusSync;
-				PRODUCT_MODULE_NAME = SlackStatusSync;
-				PRODUCT_NAME = "Slack Status Sync";
+				PRODUCT_BUNDLE_IDENTIFIER = dev.local.Pennant;
+				PRODUCT_MODULE_NAME = Pennant;
+				PRODUCT_NAME = "Pennant";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 			};
 			name = Release;
@@ -437,10 +437,10 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.local.SlackStatusSyncTests;
-				PRODUCT_NAME = SlackStatusSyncTests;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.local.PennantTests;
+				PRODUCT_NAME = PennantTests;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Slack Status Sync.app/Contents/MacOS/Slack Status Sync";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pennant.app/Contents/MacOS/Pennant";
 			};
 			name = Debug;
 		};
@@ -456,10 +456,10 @@
 					"@loader_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.local.SlackStatusSyncTests;
-				PRODUCT_NAME = SlackStatusSyncTests;
+				PRODUCT_BUNDLE_IDENTIFIER = dev.local.PennantTests;
+				PRODUCT_NAME = PennantTests;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Slack Status Sync.app/Contents/MacOS/Slack Status Sync";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Pennant.app/Contents/MacOS/Pennant";
 			};
 			name = Release;
 		};
@@ -486,7 +486,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4623F89214148A3820E2F59A /* Build configuration list for PBXProject "SlackStatusSync" */ = {
+		4623F89214148A3820E2F59A /* Build configuration list for PBXProject "Pennant" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EC86DC4F4B4C60C3EC031655 /* Debug */,
@@ -495,7 +495,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9148F3BC3952FE9BA52C33A8 /* Build configuration list for PBXNativeTarget "SlackStatusSyncTests" */ = {
+		9148F3BC3952FE9BA52C33A8 /* Build configuration list for PBXNativeTarget "PennantTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7CB61F3D2D3B2A7FBA3915B0 /* Debug */,
@@ -504,7 +504,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CD616C6EFB25E4F57A09FEDE /* Build configuration list for PBXNativeTarget "SlackStatusSync" */ = {
+		CD616C6EFB25E4F57A09FEDE /* Build configuration list for PBXNativeTarget "Pennant" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0F9FC8EE2C99E07A9753399D /* Debug */,

@@ -2,7 +2,7 @@ import SwiftUI
 import AppKit
 
 @main
-struct SlackStatusSyncApp: App {
+struct PennantApp: App {
     @StateObject private var appModel = AppModel()
 
     var body: some Scene {

@@ -2,7 +2,7 @@ import Foundation
 import OSLog
 
 public enum AppLogger {
-    public static let subsystem = "dev.local.SlackStatusSync"
+    public static let subsystem = "dev.local.Pennant"
 
     private static let logger = Logger(subsystem: subsystem, category: "app")
 

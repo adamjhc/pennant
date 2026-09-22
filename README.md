@@ -1,4 +1,4 @@
-# Slack Status Sync
+# Pennant
 
 Native macOS 14+ menu-bar app that updates your Slack status from calendar events using ordered regex rules.
 
@@ -24,10 +24,10 @@ Native macOS 14+ menu-bar app that updates your Slack status from calendar event
 
 ### With Xcode (recommended for Calendar permission testing)
 
-1. Open `SlackStatusSync.xcodeproj` in Xcode 16.
-2. Select the **Slack Status Sync** scheme.
+1. Open `Pennant.xcodeproj` in Xcode 16.
+2. Select the **Pennant** scheme.
 3. In Signing & Capabilities, choose your **Personal Team** or Apple Development team.
-   - Keep the temporary bundle ID `dev.local.SlackStatusSync` for local use.
+   - Keep the temporary bundle ID `dev.local.Pennant` for local use.
    - Do not commit a team ID into the project.
 4. Run the app. It appears only in the menu bar (no Dock icon).
 5. Open **Settings** from the menu, grant **Calendar Full Access**, paste the token, and Save.
@@ -66,7 +66,7 @@ See [docs/SMOKE_TEST.md](docs/SMOKE_TEST.md).
 
 ## Project layout
 
-- `SlackStatusSync/` — app + core sources
-- `SlackStatusSyncTests/` — unit tests / TestRunner
+- `Pennant/` — app + core sources
+- `PennantTests/` — unit tests / TestRunner
 - `Package.swift` — SwiftPM library + TestRunner for CLI checks
-- `SlackStatusSync.xcodeproj` — Xcode app project
+- `Pennant.xcodeproj` — Xcode app project

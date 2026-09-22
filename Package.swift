@@ -2,20 +2,20 @@
 import PackageDescription
 
 let package = Package(
-    name: "SlackStatusSync",
+    name: "Pennant",
     platforms: [.macOS(.v14)],
     products: [
-        .library(name: "SlackStatusSyncCore", targets: ["SlackStatusSyncCore"]),
+        .library(name: "PennantCore", targets: ["PennantCore"]),
         .executable(name: "TestRunner", targets: ["TestRunner"]),
     ],
     targets: [
         .target(
-            name: "SlackStatusSyncCore",
-            path: "SlackStatusSync",
+            name: "PennantCore",
+            path: "Pennant",
             exclude: [
-                "SlackStatusSyncApp.swift",
+                "PennantApp.swift",
                 "Info.plist",
-                "SlackStatusSync.entitlements",
+                "Pennant.entitlements",
                 "Assets.xcassets",
                 "Views",
             ]
@@ -24,8 +24,8 @@ let package = Package(
         // With Xcode installed, prefer `xcodebuild test` via scripts/check.sh.
         .executableTarget(
             name: "TestRunner",
-            dependencies: ["SlackStatusSyncCore"],
-            path: "SlackStatusSyncTests"
+            dependencies: ["PennantCore"],
+            path: "PennantTests"
         ),
     ]
 )
