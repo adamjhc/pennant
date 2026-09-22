@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6439CF22188FA14BBD363342"
-               BuildableName = "Slack Status Sync.app"
-               BlueprintName = "SlackStatusSync"
-               ReferencedContainer = "container:SlackStatusSync.xcodeproj">
+               BuildableName = "Pennant.app"
+               BlueprintName = "Pennant"
+               ReferencedContainer = "container:Pennant.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "BA128F9D3C0D15FFB32AEEA8"
-               BuildableName = "SlackStatusSyncTests.xctest"
-               BlueprintName = "SlackStatusSyncTests"
-               ReferencedContainer = "container:SlackStatusSync.xcodeproj">
+               BuildableName = "PennantTests.xctest"
+               BlueprintName = "PennantTests"
+               ReferencedContainer = "container:Pennant.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6439CF22188FA14BBD363342"
-            BuildableName = "Slack Status Sync.app"
-            BlueprintName = "SlackStatusSync"
-            ReferencedContainer = "container:SlackStatusSync.xcodeproj">
+            BuildableName = "Pennant.app"
+            BlueprintName = "Pennant"
+            ReferencedContainer = "container:Pennant.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6439CF22188FA14BBD363342"
-            BuildableName = "Slack Status Sync.app"
-            BlueprintName = "SlackStatusSync"
-            ReferencedContainer = "container:SlackStatusSync.xcodeproj">
+            BuildableName = "Pennant.app"
+            BlueprintName = "Pennant"
+            ReferencedContainer = "container:Pennant.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

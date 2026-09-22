@@ -27,10 +27,10 @@ public enum PersistenceError: Error, Equatable, Sendable {
 }
 
 public enum AppPaths {
-    public static let appSupportFolderName = "SlackStatusSync"
+    public static let appSupportFolderName = "Pennant"
     public static let settingsFileName = "settings.json"
     public static let runtimeStateFileName = "runtime-state.json"
-    public static let keychainService = "dev.local.SlackStatusSync"
+    public static let keychainService = "dev.local.Pennant"
     public static let keychainAccount = "slack-user-token"
 
     public static func applicationSupportDirectory(

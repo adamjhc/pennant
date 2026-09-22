@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Slack Status Sync</string>
+	<string>Pennant</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Slack Status Sync</string>
+	<string>Pennant</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -27,8 +27,8 @@
 	<key>NSHighResolutionCapable</key>
 	<true/>
 	<key>NSCalendarsUsageDescription</key>
-	<string>Slack Status Sync reads your calendar events to update your Slack status when matching meetings are active.</string>
+	<string>Pennant reads your calendar events to update your Slack status when matching meetings are active.</string>
 	<key>NSCalendarsFullAccessUsageDescription</key>
-	<string>Slack Status Sync reads your calendar events to update your Slack status when matching meetings are active.</string>
+	<string>Pennant reads your calendar events to update your Slack status when matching meetings are active.</string>
 </dict>
 </plist>

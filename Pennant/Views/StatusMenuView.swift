@@ -37,7 +37,7 @@ struct StatusMenuView: View {
                 openSettings()
             }
             Divider()
-            Button("Quit Slack Status Sync") {
+            Button("Quit Pennant") {
                 NSApplication.shared.terminate(nil)
             }
         }

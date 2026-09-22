@@ -1,9 +1,9 @@
 import Foundation
 
-#if canImport(SlackStatusSyncCore)
-import SlackStatusSyncCore
-#elseif canImport(SlackStatusSync)
-@testable import SlackStatusSync
+#if canImport(PennantCore)
+import PennantCore
+#elseif canImport(Pennant)
+@testable import Pennant
 #endif
 
 #if canImport(XCTest)
