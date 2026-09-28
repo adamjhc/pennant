@@ -1,0 +1,171 @@
+# Every push to main builds, signs, notarizes and publishes a release.
+# Version is MARKETING_VERSION from the project plus the commit count, e.g. 1.0.42.
+# The Sparkle appcast lives on the gh-pages branch and is served by GitHub Pages.
+
+name: Release
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "**.md"
+  workflow_dispatch:
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+env:
+  SPARKLE_VERSION: 2.10.0
+  TEAM_ID: 86CB3GP2UH
+  FEED_BASE: https://github.com/${{ github.repository }}/releases/download
+
+jobs:
+  release:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Compute version
+        id: version
+        run: |
+          base=$(sed -n 's/.*MARKETING_VERSION = \(.*\);/\1/p' Pennant.xcodeproj/project.pbxproj | head -1)
+          build=$(git rev-list --count HEAD)
+          version="$base.$build"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "build=$build" >> "$GITHUB_OUTPUT"
+          if git rev-parse -q --verify "refs/tags/v$version" >/dev/null; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "v$version already released, skipping."
+          fi
+          xcodebuild -version
+
+      - name: Test
+        if: steps.version.outputs.exists != 'true'
+        run: |
+          xcodebuild test -project Pennant.xcodeproj -scheme Pennant -destination 'platform=macOS' \
+            CODE_SIGN_IDENTITY=- CODE_SIGN_STYLE=Manual DEVELOPMENT_TEAM= ENABLE_HARDENED_RUNTIME=NO | tail -30
+          exit ${PIPESTATUS[0]}
+
+      - name: Import Developer ID certificate
+        if: steps.version.outputs.exists != 'true'
+        env:
+          P12_BASE64: ${{ secrets.DEVELOPER_ID_P12_BASE64 }}
+          P12_PASSWORD: ${{ secrets.DEVELOPER_ID_P12_PASSWORD }}
+        run: |
+          keychain="$RUNNER_TEMP/signing.keychain-db"
+          password=$(uuidgen)
+          security create-keychain -p "$password" "$keychain"
+          security set-keychain-settings -lut 21600 "$keychain"
+          security unlock-keychain -p "$password" "$keychain"
+          echo "$P12_BASE64" | base64 --decode > "$RUNNER_TEMP/cert.p12"
+          security import "$RUNNER_TEMP/cert.p12" -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k "$keychain"
+          curl -sSfL https://www.apple.com/certificateauthority/DeveloperIDG2CA.cer -o "$RUNNER_TEMP/DeveloperIDG2CA.cer"
+          security import "$RUNNER_TEMP/DeveloperIDG2CA.cer" -k "$keychain" || true
+          security set-key-partition-list -S apple-tool:,apple: -k "$password" "$keychain" >/dev/null
+          security list-keychains -d user -s "$keychain" $(security list-keychains -d user | tr -d '"')
+          security find-identity -v -p codesigning "$keychain"
+          rm "$RUNNER_TEMP/cert.p12"
+          echo "KEYCHAIN=$keychain" >> "$GITHUB_ENV"
+
+      - name: Archive and export
+        if: steps.version.outputs.exists != 'true'
+        run: |
+          xcodebuild archive -project Pennant.xcodeproj -scheme Pennant -configuration Release \
+            -destination 'generic/platform=macOS' -archivePath "$RUNNER_TEMP/Pennant.xcarchive" \
+            MARKETING_VERSION=${{ steps.version.outputs.version }} \
+            CURRENT_PROJECT_VERSION=${{ steps.version.outputs.build }} \
+            CODE_SIGN_STYLE=Manual CODE_SIGN_IDENTITY="Developer ID Application" DEVELOPMENT_TEAM=$TEAM_ID \
+            OTHER_CODE_SIGN_FLAGS="--keychain $KEYCHAIN" | tail -30
+          test ${PIPESTATUS[0]} -eq 0
+          xcodebuild -exportArchive -archivePath "$RUNNER_TEMP/Pennant.xcarchive" \
+            -exportOptionsPlist .github/ExportOptions.plist -exportPath "$RUNNER_TEMP/export"
+          codesign --verify --deep --strict --verbose=2 "$RUNNER_TEMP/export/Pennant.app"
+
+      - name: Notarize
+        if: steps.version.outputs.exists != 'true'
+        env:
+          NOTARY_API_KEY: ${{ secrets.NOTARY_API_KEY }}
+          NOTARY_KEY_ID: ${{ secrets.NOTARY_KEY_ID }}
+          NOTARY_ISSUER_ID: ${{ secrets.NOTARY_ISSUER_ID }}
+        run: |
+          key="$RUNNER_TEMP/AuthKey.p8"
+          printf '%s' "$NOTARY_API_KEY" > "$key"
+          app="$RUNNER_TEMP/export/Pennant.app"
+          ditto -c -k --keepParent "$app" "$RUNNER_TEMP/notarize.zip"
+          xcrun notarytool submit "$RUNNER_TEMP/notarize.zip" \
+            --key "$key" --key-id "$NOTARY_KEY_ID" --issuer "$NOTARY_ISSUER_ID" \
+            --wait --output-format json > "$RUNNER_TEMP/notary.json"
+          cat "$RUNNER_TEMP/notary.json"
+          status=$(plutil -extract status raw "$RUNNER_TEMP/notary.json")
+          if [ "$status" != "Accepted" ]; then
+            id=$(plutil -extract id raw "$RUNNER_TEMP/notary.json")
+            xcrun notarytool log "$id" --key "$key" --key-id "$NOTARY_KEY_ID" --issuer "$NOTARY_ISSUER_ID"
+            exit 1
+          fi
+          xcrun stapler staple "$app"
+          spctl --assess --type execute --verbose "$app"
+          rm "$key"
+
+      - name: Package and update appcast
+        if: steps.version.outputs.exists != 'true'
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+          SPARKLE_ED_PRIVATE_KEY: ${{ secrets.SPARKLE_ED_PRIVATE_KEY }}
+        run: |
+          dist="$RUNNER_TEMP/dist"
+          mkdir -p "$dist"
+          ditto -c -k --sequesterRsrc --keepParent "$RUNNER_TEMP/export/Pennant.app" "$dist/Pennant-$VERSION.zip"
+
+          previous=$(git tag --list 'v*' --sort=-v:refname | head -1)
+          if [ -n "$previous" ]; then
+            git log --no-merges --format='- %s' "$previous..HEAD" > "$dist/Pennant-$VERSION.md"
+          else
+            git log --no-merges --format='- %s' -20 > "$dist/Pennant-$VERSION.md"
+          fi
+          cp "$dist/Pennant-$VERSION.md" "$RUNNER_TEMP/notes.md"
+
+          pages="$RUNNER_TEMP/pages"
+          if git ls-remote --exit-code --heads origin gh-pages >/dev/null; then
+            git fetch origin gh-pages
+            git worktree add "$pages" -B gh-pages origin/gh-pages
+          else
+            git worktree add --orphan -b gh-pages "$pages"
+          fi
+          [ -f "$pages/appcast.xml" ] && cp "$pages/appcast.xml" "$dist/"
+
+          curl -sSfL "https://github.com/sparkle-project/Sparkle/releases/download/$SPARKLE_VERSION/Sparkle-$SPARKLE_VERSION.tar.xz" \
+            | tar -xJ -C "$RUNNER_TEMP" ./bin
+          echo "$SPARKLE_ED_PRIVATE_KEY" | "$RUNNER_TEMP/bin/generate_appcast" --ed-key-file - \
+            --download-url-prefix "$FEED_BASE/v$VERSION/" --embed-release-notes \
+            --link "https://github.com/${{ github.repository }}" "$dist"
+
+          cp "$dist/appcast.xml" "$pages/appcast.xml"
+          touch "$pages/.nojekyll"
+          echo "APPCAST_DIR=$pages" >> "$GITHUB_ENV"
+          echo "DIST=$dist" >> "$GITHUB_ENV"
+
+      - name: Publish release
+        if: steps.version.outputs.exists != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          gh release create "v$VERSION" "$DIST/Pennant-$VERSION.zip" \
+            --title "Pennant $VERSION" --notes-file "$RUNNER_TEMP/notes.md" --target "$GITHUB_SHA"
+          cd "$APPCAST_DIR"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add appcast.xml .nojekyll
+          git commit -m "Pennant $VERSION"
+          git push origin gh-pages
+
+      - name: Clean up keychain
+        if: always()
+        run: |
+          [ -n "$KEYCHAIN" ] && security delete-keychain "$KEYCHAIN" || true

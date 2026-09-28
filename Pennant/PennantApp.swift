@@ -4,10 +4,11 @@ import AppKit
 @main
 struct PennantApp: App {
     @StateObject private var appModel = AppModel()
+    @StateObject private var updater = Updater()
 
     var body: some Scene {
         MenuBarExtra {
-            StatusMenuView(model: appModel)
+            StatusMenuView(model: appModel, updater: updater)
         } label: {
             Image(systemName: "calendar.badge.clock")
                 .symbolRenderingMode(.hierarchical)
@@ -16,7 +17,7 @@ struct PennantApp: App {
         // Menu-bar (LSUIElement) apps often cannot open the system Settings scene.
         // A named Window is reliable with openWindow(id:).
         Window("Settings", id: "settings") {
-            SettingsView(model: appModel)
+            SettingsView(model: appModel, updater: updater.updater)
                 .onAppear { appModel.start() }
         }
         .defaultSize(width: 640, height: 720)

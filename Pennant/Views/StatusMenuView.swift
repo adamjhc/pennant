@@ -3,6 +3,7 @@ import AppKit
 
 struct StatusMenuView: View {
     @ObservedObject var model: AppModel
+    @ObservedObject var updater: Updater
     @Environment(\.openWindow) private var openWindow
 
     var body: some View {
@@ -36,6 +37,10 @@ struct StatusMenuView: View {
             Button("Settings…") {
                 openSettings()
             }
+            Button("Check for Updates…") {
+                updater.checkForUpdates()
+            }
+            .disabled(!updater.canCheckForUpdates)
             Divider()
             Button("Quit Pennant") {
                 NSApplication.shared.terminate(nil)

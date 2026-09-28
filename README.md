@@ -26,11 +26,8 @@ Native macOS 14+ menu-bar app that updates your Slack status from calendar event
 
 1. Open `Pennant.xcodeproj` in Xcode 16.
 2. Select the **Pennant** scheme.
-3. In Signing & Capabilities, choose your **Personal Team** or Apple Development team.
-   - Keep the temporary bundle ID `dev.local.Pennant` for local use.
-   - Do not commit a team ID into the project.
-4. Run the app. It appears only in the menu bar (no Dock icon).
-5. Open **Settings** from the menu, grant **Calendar Full Access**, paste the token, and Save.
+3. Run the app. It appears only in the menu bar (no Dock icon).
+4. Open **Settings** from the menu, grant **Calendar Full Access**, paste the token, and Save.
 
 ### Check script (unsigned / CI fallback)
 
@@ -40,6 +37,31 @@ chmod +x scripts/check.sh
 ```
 
 When full Xcode is unavailable, the script falls back to the SwiftPM `TestRunner` executable, which exercises the domain, persistence, Slack client, action executor, coordinator, and settings view-model suites.
+
+## Install
+
+Download the latest `Pennant-x.y.z.zip` from [Releases](https://github.com/adamjhc/pennant/releases/latest), unzip it, and move `Pennant.app` to Applications. Pennant checks for updates daily with [Sparkle](https://sparkle-project.org). Choose **Check for Updates…** from the menu to check now.
+
+## Releases
+
+Every push to `main` that changes more than Markdown files triggers `.github/workflows/release.yml`. The workflow tests, archives, signs with Developer ID, notarizes, and publishes a GitHub release. It then adds the release to the Sparkle feed at `https://adamjhc.github.io/pennant/appcast.xml`, which lives on the `gh-pages` branch.
+
+The version is `MARKETING_VERSION` from the project plus the commit count on `main`, for example `1.0.42`. Change `MARKETING_VERSION` to bump the major or minor version. Release notes are the commit subjects since the previous tag.
+
+The workflow needs these repository secrets:
+
+| Secret | What it is |
+| --- | --- |
+| `DEVELOPER_ID_P12_BASE64` | Developer ID Application certificate and private key, exported as `.p12`, base64 encoded |
+| `DEVELOPER_ID_P12_PASSWORD` | Password for that `.p12` |
+| `NOTARY_API_KEY` | Contents of an App Store Connect API key `.p8` file |
+| `NOTARY_KEY_ID` | That key's ID |
+| `NOTARY_ISSUER_ID` | The App Store Connect issuer ID |
+| `SPARKLE_ED_PRIVATE_KEY` | Sparkle EdDSA private key. Export it with `generate_keys --account com.adamcox.pennant -x <file>` |
+
+The matching Sparkle public key is `SUPublicEDKey` in `Pennant/Info.plist`. Do not lose the private key. Without it, installed copies cannot verify new updates.
+
+The app is sandboxed, so `Pennant/Info.plist` sets `SUEnableInstallerLauncherService` and `Pennant/Pennant.entitlements` allows the `-spks` and `-spki` mach lookups Sparkle's installer needs.
 
 ## Behavior summary
 
