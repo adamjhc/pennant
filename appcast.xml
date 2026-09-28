@@ -1,0 +1,22 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>Pennant</title>
+        <item>
+            <title>1.0.6</title>
+            <pubDate>Mon, 28 Sep 2026 17:06:36 +0000</pubDate>
+            <link>https://github.com/adamjhc/pennant</link>
+            <sparkle:version>6</sparkle:version>
+            <sparkle:shortVersionString>1.0.6</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description sparkle:format="markdown"><![CDATA[- Publish signed, notarized releases with Sparkle updates so installed copies stay current, matching hem.
+- Rename the app to Pennant so the product name, module, and bundle ID match.
+- Rewrite in Swift
+- Remove everything
+- Fix duplicate logs
+- Initial commit of slack-status-sync.
+]]></description>
+            <enclosure url="https://github.com/adamjhc/pennant/releases/download/v1.0.6/Pennant-1.0.6.zip" length="1889756" type="application/octet-stream" sparkle:edSignature="EEewInbajw0pM7kMU1PmaPE9Me8H283ic1qFFe7xdHxIxQKMx0xjurfJj+nDE6UgVRSoDK2JHG7/NnxBzwYuDQ=="/>
+        </item>
+    </channel>
+</rss>
