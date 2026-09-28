@@ -1,4 +1,4 @@
-# Every push to main builds, signs, notarizes and publishes a release.
+# Every push to main, except one that only changes Markdown or YAML, builds, signs, notarizes and publishes a release.
 # Version is MARKETING_VERSION from the project plus the commit count, e.g. 1.0.42.
 # The Sparkle appcast lives on the gh-pages branch and is served by GitHub Pages.
 
@@ -9,6 +9,8 @@ on:
     branches: [main]
     paths-ignore:
       - "**.md"
+      - "**.yml"
+      - "**.yaml"
   workflow_dispatch:
 
 concurrency:

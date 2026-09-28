@@ -44,7 +44,7 @@ Download the latest `Pennant-x.y.z.zip` from [Releases](https://github.com/adamj
 
 ## Releases
 
-Every push to `main` that changes more than Markdown files triggers `.github/workflows/release.yml`. The workflow tests, archives, signs with Developer ID, notarizes, and publishes a GitHub release. It then adds the release to the Sparkle feed at `https://adamjhc.github.io/pennant/appcast.xml`, which lives on the `gh-pages` branch.
+Every push to `main` that changes more than Markdown or YAML files triggers `.github/workflows/release.yml`. The workflow tests, archives, signs with Developer ID, notarizes, and publishes a GitHub release. It then adds the release to the Sparkle feed at `https://adamjhc.github.io/pennant/appcast.xml`, which lives on the `gh-pages` branch.
 
 The version is `MARKETING_VERSION` from the project plus the commit count on `main`, for example `1.0.42`. Change `MARKETING_VERSION` to bump the major or minor version. Release notes are the commit subjects since the previous tag.
 
