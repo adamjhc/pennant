@@ -1,4 +1,5 @@
 # Every push to main, except one that only changes Markdown or YAML, builds, signs, notarizes and publishes a release.
+# Each release has Pennant.dmg for first installs and Pennant-<version>.zip for Sparkle updates.
 # Version is MARKETING_VERSION from the project plus the commit count, e.g. 1.0.42.
 # The Sparkle appcast lives on the gh-pages branch and is served by GitHub Pages.
 
@@ -22,6 +23,7 @@ permissions:
 
 env:
   SPARKLE_VERSION: 2.10.0
+  DMGBUILD_VERSION: 1.6.7
   TEAM_ID: 86CB3GP2UH
   FEED_BASE: https://github.com/${{ github.repository }}/releases/download
 
@@ -95,24 +97,23 @@ jobs:
           NOTARY_API_KEY: ${{ secrets.NOTARY_API_KEY }}
           NOTARY_KEY_ID: ${{ secrets.NOTARY_KEY_ID }}
           NOTARY_ISSUER_ID: ${{ secrets.NOTARY_ISSUER_ID }}
+        run: .github/notarize.sh "$RUNNER_TEMP/export/Pennant.app"
+
+      # The disk image is for first installs. Sparkle keeps using the zip, so the image stays out of $dist.
+      - name: Build disk image
+        if: steps.version.outputs.exists != 'true'
+        env:
+          NOTARY_API_KEY: ${{ secrets.NOTARY_API_KEY }}
+          NOTARY_KEY_ID: ${{ secrets.NOTARY_KEY_ID }}
+          NOTARY_ISSUER_ID: ${{ secrets.NOTARY_ISSUER_ID }}
         run: |
-          key="$RUNNER_TEMP/AuthKey.p8"
-          printf '%s' "$NOTARY_API_KEY" > "$key"
-          app="$RUNNER_TEMP/export/Pennant.app"
-          ditto -c -k --keepParent "$app" "$RUNNER_TEMP/notarize.zip"
-          xcrun notarytool submit "$RUNNER_TEMP/notarize.zip" \
-            --key "$key" --key-id "$NOTARY_KEY_ID" --issuer "$NOTARY_ISSUER_ID" \
-            --wait --output-format json > "$RUNNER_TEMP/notary.json"
-          cat "$RUNNER_TEMP/notary.json"
-          status=$(plutil -extract status raw "$RUNNER_TEMP/notary.json")
-          if [ "$status" != "Accepted" ]; then
-            id=$(plutil -extract id raw "$RUNNER_TEMP/notary.json")
-            xcrun notarytool log "$id" --key "$key" --key-id "$NOTARY_KEY_ID" --issuer "$NOTARY_ISSUER_ID"
-            exit 1
-          fi
-          xcrun stapler staple "$app"
-          spctl --assess --type execute --verbose "$app"
-          rm "$key"
+          python3 -m venv "$RUNNER_TEMP/venv"
+          "$RUNNER_TEMP/venv/bin/pip" install --quiet dmgbuild==$DMGBUILD_VERSION
+          dmg="$RUNNER_TEMP/Pennant.dmg"
+          "$RUNNER_TEMP/venv/bin/dmgbuild" -s .github/dmg/settings.py -D app="$RUNNER_TEMP/export/Pennant.app" Pennant "$dmg"
+          codesign --sign "Developer ID Application" --keychain "$KEYCHAIN" --timestamp "$dmg"
+          .github/notarize.sh "$dmg"
+          echo "DMG=$dmg" >> "$GITHUB_ENV"
 
       - name: Package and update appcast
         if: steps.version.outputs.exists != 'true'
@@ -158,7 +159,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           VERSION: ${{ steps.version.outputs.version }}
         run: |
-          gh release create "v$VERSION" "$DIST/Pennant-$VERSION.zip" \
+          gh release create "v$VERSION" "$DIST/Pennant-$VERSION.zip" "$DMG" \
             --title "Pennant $VERSION" --notes-file "$RUNNER_TEMP/notes.md" --target "$GITHUB_SHA"
           cd "$APPCAST_DIR"
           git config user.name "github-actions[bot]"
