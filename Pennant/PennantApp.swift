@@ -10,8 +10,7 @@ struct PennantApp: App {
         MenuBarExtra {
             StatusMenuView(model: appModel, updater: updater)
         } label: {
-            Image(systemName: "calendar.badge.clock")
-                .symbolRenderingMode(.hierarchical)
+            Image("MenuBarIcon")
         }
 
         // Menu-bar (LSUIElement) apps often cannot open the system Settings scene.
