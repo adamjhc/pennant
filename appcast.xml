@@ -3,6 +3,19 @@
     <channel>
         <title>Pennant</title>
         <item>
+            <title>1.0.9</title>
+            <pubDate>Fri, 02 Oct 2026 15:56:50 +0000</pubDate>
+            <link>https://github.com/adamjhc/pennant</link>
+            <sparkle:version>9</sparkle:version>
+            <sparkle:shortVersionString>1.0.9</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <description sparkle:format="markdown"><![CDATA[- Publish a styled drag-to-Applications disk image with each release so first installs follow the usual Mac pattern, while Sparkle keeps updating from the zip.
+- Skip releases for pushes that only change YAML, since workflow and config edits don't change the app.
+- Use actions/checkout v7 so releases run on Node 24 instead of the deprecated Node 20.
+]]></description>
+            <enclosure url="https://github.com/adamjhc/pennant/releases/download/v1.0.9/Pennant-1.0.9.zip" length="1889740" type="application/octet-stream" sparkle:edSignature="HknkEtDBSdKtO09X4dmMAadyv/w4uIWSZnO4maxQJKq8dW3xrKg72jTgAprWLiRxl31rmdJ7Ameliq4+KJb7Cw=="/>
+        </item>
+        <item>
             <title>1.0.6</title>
             <pubDate>Mon, 28 Sep 2026 17:06:36 +0000</pubDate>
             <link>https://github.com/adamjhc/pennant</link>
